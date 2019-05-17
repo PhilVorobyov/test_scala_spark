@@ -6,9 +6,11 @@ object TestSpark {
       .setAppName("HelloSpark")
       .setMaster("local[*]")
     val sc = new SparkContext(conf)
-
-    println("hello spark")
-
+    sc.setLogLevel("Error")
+    val textFile = sc.textFile("src/main/resources/test.txt", 3)
+    val counts = textFile.flatMap(_.split(" "))
+        .count()
+    print(counts)
     sc.stop()
   }
 }
