@@ -47,7 +47,7 @@ object QueryClient {
     ))
   }
 
-  def findQuery(taskNumber: Int):Query = {
+  def findQuery(taskNumber: Int): Query = {
     taskNumber match {
       case 1 => new FirstTaskQuery
       case 2 => new SecondTaskQuery
