@@ -3,12 +3,12 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object QueryClient {
   def executeQuery(taskNumber: Int): Unit = {
-    val df = getDataFrame()
+    val df = getDataFrame
     val query: Query = findQuery(taskNumber)
     query.execute(df)
   }
 
-  def getDataFrame(): DataFrame = {
+  def getDataFrame: DataFrame = {
     val spark = SparkSession.builder
       .master("local[*]")
       .getOrCreate()
