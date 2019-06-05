@@ -4,20 +4,24 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object QueryClient {
+
   def executeQuery(taskNumber: Int): Unit = {
-    val df = getDataFrame
+    val spark = getSparkContext()
+    spark.sparkContext.setLogLevel("ERROR")
+    val df = getDataFrame(spark)
     val query: Query = findQuery(taskNumber)
     query.execute(df)
+    spark.close()
   }
 
-  def getDataFrame: DataFrame = {
-    val spark = SparkSession.builder
-      .master("local[*]")
-      .getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
+  def getSparkContext() = {
+    SparkSession.builder.master("local[*]").getOrCreate()
+  }
+
+  def getDataFrame(spark: SparkSession): DataFrame = {
     spark.read.format("csv")
       .schema(loadSchema())
-      .load("src/main/resources/train.csv")
+      .load("src/main/input_data/train.csv")
   }
 
   def loadSchema(): StructType = {

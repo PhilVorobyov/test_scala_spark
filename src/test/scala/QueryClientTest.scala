@@ -1,3 +1,4 @@
+import by.vorobyov.{QueryClient, ThirdTaskQuery}
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.types.StructType
 import org.scalatest.FunSuite
