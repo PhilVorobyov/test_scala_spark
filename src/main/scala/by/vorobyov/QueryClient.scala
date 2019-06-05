@@ -1,4 +1,6 @@
-import org.apache.spark.sql.types.{DoubleType, IntegerType, StringType, StructField, StructType}
+package by.vorobyov
+
+import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object QueryClient {

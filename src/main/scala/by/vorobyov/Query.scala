@@ -1,3 +1,5 @@
+package by.vorobyov
+
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.desc
 
