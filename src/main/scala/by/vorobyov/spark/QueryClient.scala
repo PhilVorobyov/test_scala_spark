@@ -1,4 +1,4 @@
-package by.vorobyov
+package by.vorobyov.spark
 
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, SparkSession}
