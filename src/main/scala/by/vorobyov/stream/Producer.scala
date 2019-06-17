@@ -2,22 +2,25 @@ package by.vorobyov.stream
 
 import java.util.Properties
 import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors.newFixedThreadPool
 
-import by.vorobyov.stream.PropertiesHelper.prop
+import by.vorobyov.stream.helper.JsonGenerator
+import by.vorobyov.stream.helper.PropertiesHelper.prop
 import org.apache.kafka.clients.producer._
 
-object JsonProducer {
+/** write messages to kafka. */
+object Producer {
 
-  def writeToKafka(topic: String): Unit = {
+  def writeToKafka(topic: String, numberOfThreads: Int): Unit = {
     val producer = initializeProducer()
-    val pool = java.util.concurrent.Executors.newFixedThreadPool(3)
+    val pool = newFixedThreadPool(numberOfThreads)
     while (true) {
       sendJsonToKafka(producer, pool, topic)
     }
     producer.close()
   }
 
-  def sendJsonToKafka(producer: KafkaProducer[String, String], pool: ExecutorService, topic: String): Unit = {
+  private def sendJsonToKafka(producer: KafkaProducer[String, String], pool: ExecutorService, topic: String): Unit = {
     Thread.sleep(1000)
     pool.execute(
     new Runnable {

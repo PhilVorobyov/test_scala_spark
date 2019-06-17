@@ -6,6 +6,7 @@ import by.vorobyov.stream.helper.PropertiesHelper.prop
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.openjdk.jmh.annotations.{Benchmark, BenchmarkMode, Mode, OutputTimeUnit}
 
+/** receive kafka messages. */
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Array(Mode.Throughput))
 object Consumer {
